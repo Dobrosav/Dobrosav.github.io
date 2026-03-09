@@ -22,6 +22,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a { color: var(--accent); text-decoration: none; transition: 0.3s; }
@@ -29,75 +30,141 @@
 
         .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
 
+        /* --- ANIMACIJE --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(88, 166, 255, 0.2); }
+            50% { box-shadow: 0 0 35px rgba(88, 166, 255, 0.6); }
+            100% { box-shadow: 0 0 15px rgba(88, 166, 255, 0.2); }
+        }
+
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         /* Hero Section */
         header {
             text-align: center;
             padding: 4rem 0 3rem 0;
             border-bottom: 1px solid var(--border);
+            animation: fadeInUp 0.8s ease-out;
         }
         
         .profile-img {
-            width: 200px;  /* Širina i visina moraju biti iste za krug! */
+            width: 200px;  
             height: 200px; 
             border-radius: 50%;
             border: 3px solid var(--accent);
             margin-bottom: 1.5rem;
             object-fit: cover;
-            object-position: top; /* Pomera fokus na lice */
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
+            object-position: top;
+            animation: pulseGlow 3s infinite ease-in-out; /* Pulsirajući efekat */
         }
 
-        h1 { font-size: 3rem; margin-bottom: 0.5rem; letter-spacing: -1px; }
+        h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 0.5rem; 
+            letter-spacing: -1px; 
+            /* Gradient tekst */
+            background: linear-gradient(90deg, #c9d1d9, #58a6ff, #ffffff, #58a6ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientText 6s ease infinite;
+        }
+        
         h2 { color: var(--text-muted); font-weight: 400; font-size: 1.5rem; margin-bottom: 1rem; }
         .tagline { font-style: italic; color: var(--accent); max-width: 600px; margin: 0 auto; }
 
         .social-links { margin-top: 1.5rem; font-size: 1.5rem; }
-        .social-links a { margin: 0 10px; color: var(--text-main); }
-        .social-links a:hover { color: var(--accent); }
+        .social-links a { margin: 0 10px; color: var(--text-main); display: inline-block; transition: transform 0.3s; }
+        .social-links a:hover { color: var(--accent); transform: translateY(-5px) scale(1.2); } /* Ikonice iskaču na hover */
 
         /* Dugme za CV */
         .action-buttons { margin-top: 2rem; }
         .btn-download {
             display: inline-block;
-            padding: 0.6rem 1.5rem;
+            padding: 0.8rem 1.8rem;
             color: var(--accent);
-            border: 1px solid var(--accent);
-            border-radius: 5px;
+            border: 2px solid var(--accent);
+            border-radius: 30px; /* Modernije, okruglo dugme */
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(88, 166, 255, 0.1);
         }
         .btn-download:hover {
             background-color: var(--accent);
             color: var(--bg-color);
             text-decoration: none;
-            text-shadow: none;
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.6);
+            transform: translateY(-3px);
         }
         .btn-download i { margin-right: 8px; }
 
-        /* Sections */
-        section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+        /* Sections sa delay animacijom */
+        section { 
+            padding: 3rem 0; 
+            border-bottom: 1px solid var(--border); 
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        #about { animation-delay: 0.2s; }
+        #experience { animation-delay: 0.4s; }
+        #projects { animation-delay: 0.6s; }
+        #skills { animation-delay: 0.8s; }
+        #personal { animation-delay: 1s; }
+
         h3 { font-size: 1.8rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
         h3 i { color: var(--accent); }
 
         /* Experience & Education */
-        .timeline-item { margin-bottom: 2rem; }
+        .timeline-item { margin-bottom: 2rem; border-left: 2px solid var(--border); padding-left: 1.5rem; position: relative; transition: all 0.3s;}
+        .timeline-item:hover { border-left-color: var(--accent); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: background 0.3s;
+        }
+        .timeline-item:hover::before { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+        
         .timeline-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
         .timeline-title { font-weight: 600; font-size: 1.2rem; }
-        .timeline-date { color: var(--text-muted); font-size: 0.9rem; }
+        .timeline-date { color: var(--text-muted); font-size: 0.9rem; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 12px;}
         .timeline-subtitle { color: var(--accent); margin-bottom: 0.5rem; font-size: 0.95rem; }
         .timeline-item ul { margin-left: 1.5rem; color: var(--text-muted); }
         .timeline-item li { margin-bottom: 0.3rem; }
 
-        /* Projects Grid */
+        /* Projects Grid - 3D Hover */
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 1.5rem;
-            transition: transform 0.2s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Elastična animacija */
+            position: relative;
+            z-index: 1;
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .card:hover { 
+            transform: translateY(-10px) scale(1.02); 
+            border-color: var(--accent); 
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(88, 166, 255, 0.2);
+            z-index: 2;
+        }
         .card h4 { color: var(--accent); margin-bottom: 0.5rem; }
         .tech-stack { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .tech-tag {
@@ -106,16 +173,31 @@
             padding: 0.2rem 0.6rem;
             border-radius: 12px;
             font-size: 0.8rem;
+            transition: all 0.3s;
         }
+        .card:hover .tech-tag { background: rgba(88, 166, 255, 0.2); }
 
-        /* Skills */
+        /* Skills - Hover */
         .skills-container { display: flex; flex-wrap: wrap; gap: 1rem; }
-        .skill-category { background: var(--card-bg); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); flex: 1; min-width: 200px; }
+        .skill-category { 
+            background: var(--card-bg); 
+            padding: 1rem; 
+            border-radius: 8px; 
+            border: 1px solid var(--border); 
+            flex: 1; 
+            min-width: 200px;
+            transition: all 0.3s;
+        }
+        .skill-category:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(88, 166, 255, 0.1);
+        }
         .skill-category h4 { margin-bottom: 0.8rem; color: var(--text-main); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
         .skill-category p { color: var(--text-muted); font-size: 0.9rem; }
 
         /* Footer */
-        footer { text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem; }
+        footer { text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem; opacity: 0; animation: fadeInUp 0.8s ease-out 1.2s forwards;}
     </style>
 </head>
 <body>
@@ -253,4 +335,4 @@
     </div>
 
 </body>
-</html>/
+</html>
