@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dobrosav Vlašković | Software Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --card-bg: #161b22;
+            --border: #30363d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: 0.3s; }
+        a:hover { text-decoration: underline; text-shadow: 0 0 8px rgba(88, 166, 255, 0.4); }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+
+        /* Hero Section */
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 0.5rem; letter-spacing: -1px; }
+        h2 { color: var(--text-muted); font-weight: 400; font-size: 1.5rem; margin-bottom: 1rem; }
+        .tagline { font-style: italic; color: var(--accent); max-width: 600px; margin: 0 auto; }
+
+        .social-links { margin-top: 1.5rem; font-size: 1.5rem; }
+        .social-links a { margin: 0 10px; color: var(--text-main); }
+        .social-links a:hover { color: var(--accent); }
+
+        /* Sections */
+        section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+        h3 { font-size: 1.8rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        h3 i { color: var(--accent); }
+
+        /* Experience & Education */
+        .timeline-item { margin-bottom: 2rem; }
+        .timeline-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+        .timeline-title { font-weight: 600; font-size: 1.2rem; }
+        .timeline-date { color: var(--text-muted); font-size: 0.9rem; }
+        .timeline-subtitle { color: var(--accent); margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .timeline-item ul { margin-left: 1.5rem; color: var(--text-muted); }
+        .timeline-item li { margin-bottom: 0.3rem; }
+
+        /* Projects Grid */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .card h4 { color: var(--accent); margin-bottom: 0.5rem; }
+        .tech-stack { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tech-tag {
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        /* Skills */
+        .skills-container { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .skill-category { background: var(--card-bg); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); flex: 1; min-width: 200px; }
+        .skill-category h4 { margin-bottom: 0.8rem; color: var(--text-main); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+        .skill-category p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Footer */
+        footer { text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="https://avatars.githubusercontent.com/u/Dobrosav" alt="Dobrosav Vlašković" class="profile-img">
+            <h1>Dobrosav Vlašković</h1>
+            <h2>Medior Java Backend Developer</h2>
+            <p class="tagline">"Passionate developer focused on the intersection of high-level architecture and low-level optimization."</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/Dobrosav" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/dobrosav-vlaskovic-239965212/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:vlaskovic.dodo@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="#"><i class="fas fa-map-marker-alt" style="font-size: 1rem;"> Belgrade, Serbia</i></a>
+            </div>
+        </header>
+
+        <section id="about">
+            <h3><i class="fas fa-user-terminal"></i> Profile</h3>
+            <p>Java Backend Developer with proven experience in designing and refactoring backend systems using Spring Boot, RESTful APIs, and relational databases. I work well in cross-functional teams, with a strong focus on clean code, test coverage, and system performance in high-concurrency environments. Comfortable navigating both greenfield and legacy codebases, with a solid understanding of backend architecture and deployment pipelines.</p>
+        </section>
+
+        <section id="experience">
+            <h3><i class="fas fa-briefcase"></i> Experience</h3>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="timeline-title">Yettel Srbija</span>
+                    <span class="timeline-date">2022 - Present</span>
+                </div>
+                <div class="timeline-subtitle">Software Engineer</div>
+                <ul>
+                    <li>Modernised the company's voice-bot platform, processing >500k calls daily with an average response time of 50 ms.</li>
+                    <li>Engineered robust RESTful APIs in Spring Boot and integrated them with five internal teams.</li>
+                    <li>Refactored legacy PHP/Java services into Spring Boot, introduced JUnit coverage >85%, and cut mean time-to-repair by 30%.</li>
+                    <li>Defined database schemas, wrote comprehensive documentation, and mentored junior engineers.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="timeline-title">University of Illinois at Urbana-Champaign</span>
+                    <span class="timeline-date">2021 - 2022</span>
+                </div>
+                <div class="timeline-subtitle">Research Associate</div>
+                <ul>
+                    <li>Automated pull-request status checks with Java, Maven and Selenium, reducing feedback cycles from hours to minutes.</li>
+                    <li>Performed large-scale web scraping (10k+ data points) and configured GitHub Actions workflows for reproducible OSS experiments.</li>
+                </ul>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="timeline-title">Association "SHIFT"</span>
+                    <span class="timeline-date">2018 - 2022</span>
+                </div>
+                <div class="timeline-subtitle">Web Designer / Developer & Trainer</div>
+                <ul>
+                    <li>Built accessible websites and a custom Text-to-Speech tool; applied SEO strategies that doubled portal traffic.</li>
+                    <li>Organised and taught Web-Development courses to 40+ participants.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h3><i class="fas fa-code-branch"></i> Current Projects & Lab</h3>
+            <div class="projects-grid">
+                <div class="card">
+                    <h4>Restless</h4>
+                    <p>A lightweight, powerful desktop API client being built as a fast alternative to Postman.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Electron</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TypeScript</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>Matches (Backend)</h4>
+                    <p>Building the backend architecture for an inclusive dating app, focusing on scalability and test coverage.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">Flutter/Dart (Client)</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>Native Book Tracker</h4>
+                    <p>A native mobile application developed to help users track and manage their personal reading habits and libraries.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Android</span>
+                        <span class="tech-tag">Java/Kotlin</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h3><i class="fas fa-layer-group"></i> Technical Arsenal</h3>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h4>Core Backend</h4>
+                    <p>Java, Spring Boot, EJB, REST, SOAP, C/C++, Python, PHP</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Databases</h4>
+                    <p>PostgreSQL, MySQL, Oracle, Redis, Hibernate, JPA</p>
+                </div>
+                <div class="skill-category">
+                    <h4>DevOps & Tools</h4>
+                    <p>Git, GitHub Actions, Docker, Linux, Maven, WildFly, CI/CD</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Quality & Other</h4>
+                    <p>JUnit, Selenium, Legacy Refactoring, Accessibility-first dev</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="personal">
+            <h3><i class="fas fa-coffee"></i> Beyond the Code</h3>
+            <p>When I'm not debugging Docker containers or refactoring legacy code, I'm an avid watch enthusiast (proud owner of a Citizen Promaster Sky, among others) and enjoy exploring the rich history and designations of fine cognac.</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Dobrosav Vlašković. Built with focus and clean code.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
