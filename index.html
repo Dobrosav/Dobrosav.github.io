@@ -37,13 +37,13 @@
         }
         
         .profile-img {
-            width: 200px; 
-            height: 280px; 
+            width: 200px;  /* Širina i visina moraju biti iste za krug! */
+            height: 200px; 
             border-radius: 50%;
             border: 3px solid var(--accent);
             margin-bottom: 1.5rem;
             object-fit: cover;
-            object-position: top; /* OVO JE KLJUČNO: Pomera fokus slike na gore, ka tvom licu */
+            object-position: top; /* Pomera fokus na lice */
             box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
         }
 
@@ -54,6 +54,25 @@
         .social-links { margin-top: 1.5rem; font-size: 1.5rem; }
         .social-links a { margin: 0 10px; color: var(--text-main); }
         .social-links a:hover { color: var(--accent); }
+
+        /* Dugme za CV */
+        .action-buttons { margin-top: 2rem; }
+        .btn-download {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-download:hover {
+            background-color: var(--accent);
+            color: var(--bg-color);
+            text-decoration: none;
+            text-shadow: none;
+        }
+        .btn-download i { margin-right: 8px; }
 
         /* Sections */
         section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
@@ -113,6 +132,12 @@
                 <a href="https://www.linkedin.com/in/dobrosav-vlaskovic-239965212/" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:vlaskovic.dodo@gmail.com"><i class="fas fa-envelope"></i></a>
                 <a href="#"><i class="fas fa-map-marker-alt" style="font-size: 1rem;"> Belgrade, Serbia</i></a>
+            </div>
+
+            <div class="action-buttons">
+                <a href="Dobrosav_Vlaskovic_CV.pdf" target="_blank" class="btn-download">
+                    <i class="fas fa-file-pdf"></i> Download CV
+                </a>
             </div>
         </header>
 
@@ -228,4 +253,4 @@
     </div>
 
 </body>
-</html>
+</html>/
