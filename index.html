@@ -13,6 +13,7 @@
             --accent: #58a6ff;
             --card-bg: #161b22;
             --border: #30363d;
+            --terminal-green: #3fb950;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -48,6 +49,11 @@
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
         /* Hero Section */
         header {
             text-align: center;
@@ -64,14 +70,13 @@
             margin-bottom: 1.5rem;
             object-fit: cover;
             object-position: top;
-            animation: pulseGlow 3s infinite ease-in-out; /* Pulsirajući efekat */
+            animation: pulseGlow 3s infinite ease-in-out;
         }
 
         h1 { 
             font-size: 3.5rem; 
             margin-bottom: 0.5rem; 
             letter-spacing: -1px; 
-            /* Gradient tekst */
             background: linear-gradient(90deg, #c9d1d9, #58a6ff, #ffffff, #58a6ff);
             background-size: 300% 300%;
             -webkit-background-clip: text;
@@ -84,7 +89,7 @@
 
         .social-links { margin-top: 1.5rem; font-size: 1.5rem; }
         .social-links a { margin: 0 10px; color: var(--text-main); display: inline-block; transition: transform 0.3s; }
-        .social-links a:hover { color: var(--accent); transform: translateY(-5px) scale(1.2); } /* Ikonice iskaču na hover */
+        .social-links a:hover { color: var(--accent); transform: translateY(-5px) scale(1.2); }
 
         /* Dugme za CV */
         .action-buttons { margin-top: 2rem; }
@@ -93,7 +98,7 @@
             padding: 0.8rem 1.8rem;
             color: var(--accent);
             border: 2px solid var(--accent);
-            border-radius: 30px; /* Modernije, okruglo dugme */
+            border-radius: 30px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -125,6 +130,59 @@
         h3 { font-size: 1.8rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
         h3 i { color: var(--accent); }
 
+        /* --- TERMINAL EFEKAT --- */
+        .terminal-window {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 1rem;
+            text-align: left;
+        }
+        .terminal-header {
+            background-color: var(--card-bg);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .terminal-button.close { background-color: #ff5f56; }
+        .terminal-button.minimize { background-color: #ffbd2e; }
+        .terminal-button.maximize { background-color: #27c93f; }
+        .terminal-title {
+            color: var(--text-muted);
+            font-family: monospace;
+            font-size: 0.85rem;
+            flex-grow: 1;
+            text-align: center;
+            margin-right: 56px; /* Da bi bilo na sredini, balansira dugmiće */
+        }
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .terminal-prompt { color: var(--terminal-green); font-weight: bold; }
+        .terminal-command { color: var(--accent); }
+        .terminal-text { color: var(--text-main); }
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background-color: var(--text-main);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
         /* Experience & Education */
         .timeline-item { margin-bottom: 2rem; border-left: 2px solid var(--border); padding-left: 1.5rem; position: relative; transition: all 0.3s;}
         .timeline-item:hover { border-left-color: var(--accent); }
@@ -155,7 +213,7 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 1.5rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Elastična animacija */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             position: relative;
             z-index: 1;
         }
@@ -225,7 +283,21 @@
 
         <section id="about">
             <h3><i class="fas fa-user-terminal"></i> Profile</h3>
-            <p>Java Backend Developer with proven experience in designing and refactoring backend systems using Spring Boot, RESTful APIs, and relational databases. I work well in cross-functional teams, with a strong focus on clean code, test coverage, and system performance in high-concurrency environments. Comfortable navigating both greenfield and legacy codebases, with a solid understanding of backend architecture and deployment pipelines.</p>
+            
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                    <div class="terminal-title">bash - dobrosav@backend-server:~</div>
+                </div>
+                <div class="terminal-body">
+                    <div><span class="terminal-prompt">dobrosav@backend-server:~$</span> <span class="terminal-command">cat profile.txt</span></div>
+                    <br>
+                    <div class="terminal-text"><span id="typed-text"></span><span class="cursor">&nbsp;</span></div>
+                </div>
+            </div>
+
         </section>
 
         <section id="experience">
@@ -334,5 +406,21 @@
         </footer>
     </div>
 
+    <script>
+        const textToType = "Java Backend Developer with proven experience in designing and refactoring backend systems using Spring Boot, RESTful APIs, and relational databases. I work well in cross-functional teams, with a strong focus on clean code, test coverage, and system performance in high-concurrency environments. Comfortable navigating both greenfield and legacy codebases, with a solid understanding of backend architecture and deployment pipelines.";
+        const typedTextElement = document.getElementById('typed-text');
+        let index = 0;
+
+        function typeWriter() {
+            if (index < textToType.length) {
+                typedTextElement.innerHTML += textToType.charAt(index);
+                index++;
+                setTimeout(typeWriter, 15); // Brzina kucanja - 15ms po slovu
+            }
+        }
+
+        // Sačekaj da se završe CSS fade-in animacije (oko 1.2 sekunde) pa kreni da kucaš
+        setTimeout(typeWriter, 1200);
+    </script>
 </body>
 </html>
