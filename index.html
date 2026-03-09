@@ -37,12 +37,13 @@
         }
         
         .profile-img {
-            width: 150px;
-            height: 150px;
+            width: 180px; /* Malo sam je povećao da bude upečatljivija */
+            height: 180px; /* Mora biti isto kao width da bi krug bio pravilan */
             border-radius: 50%;
             border: 3px solid var(--accent);
             margin-bottom: 1.5rem;
             object-fit: cover;
+            object-position: top; /* OVO JE KLJUČNO: Pomera fokus slike na gore, ka tvom licu */
             box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
         }
 
