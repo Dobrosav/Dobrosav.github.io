@@ -123,6 +123,7 @@
         }
         #about { animation-delay: 0.2s; }
         #experience { animation-delay: 0.4s; }
+        #metrics { animation-delay: 0.5s; border-bottom: none; padding-bottom: 1rem; }
         #projects { animation-delay: 0.6s; }
         #skills { animation-delay: 0.8s; }
         #personal { animation-delay: 1s; }
@@ -162,7 +163,7 @@
             font-size: 0.85rem;
             flex-grow: 1;
             text-align: center;
-            margin-right: 56px; /* Da bi bilo na sredini, balansira dugmiće */
+            margin-right: 56px; 
         }
         .terminal-body {
             padding: 1.5rem;
@@ -181,6 +182,43 @@
             animation: blink 1s step-end infinite;
             vertical-align: middle;
             margin-left: 2px;
+        }
+
+        /* --- METRIKE (BROJAČI) --- */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(88, 166, 255, 0.1);
+        }
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+        }
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         /* Experience & Education */
@@ -275,7 +313,7 @@
             </div>
 
             <div class="action-buttons">
-                <a href="Dobrosav_Vlašković_Resume.pdf" target="_blank" class="btn-download">
+                <a href="Dobrosav_Vlaskovic_CV.pdf" target="_blank" class="btn-download">
                     <i class="fas fa-file-pdf"></i> Download CV
                 </a>
             </div>
@@ -297,7 +335,24 @@
                     <div class="terminal-text"><span id="typed-text"></span><span class="cursor">&nbsp;</span></div>
                 </div>
             </div>
+        </section>
 
+        <section id="metrics">
+            <h3><i class="fas fa-chart-line"></i> Impact By The Numbers</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number" data-target="500" data-suffix="k+">0</div>
+                    <div class="metric-label">Daily Calls Processed</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number" data-target="50" data-suffix=" ms">0</div>
+                    <div class="metric-label">Avg Response Time</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number" data-target="85" data-suffix="%">0</div>
+                    <div class="metric-label">JUnit Test Coverage</div>
+                </div>
+            </div>
         </section>
 
         <section id="experience">
@@ -407,6 +462,7 @@
     </div>
 
     <script>
+        // 1. Typing Efekat u Terminalu
         const textToType = "Java Backend Developer with proven experience in designing and refactoring backend systems using Spring Boot, RESTful APIs, and relational databases. I work well in cross-functional teams, with a strong focus on clean code, test coverage, and system performance in high-concurrency environments. Comfortable navigating both greenfield and legacy codebases, with a solid understanding of backend architecture and deployment pipelines.";
         const typedTextElement = document.getElementById('typed-text');
         let index = 0;
@@ -415,12 +471,50 @@
             if (index < textToType.length) {
                 typedTextElement.innerHTML += textToType.charAt(index);
                 index++;
-                setTimeout(typeWriter, 15); // Brzina kucanja - 15ms po slovu
+                setTimeout(typeWriter, 15);
             }
         }
-
-        // Sačekaj da se završe CSS fade-in animacije (oko 1.2 sekunde) pa kreni da kucaš
         setTimeout(typeWriter, 1200);
+
+        // 2. Animacija Brojača (Pokreće se na scroll)
+        const counters = document.querySelectorAll('.metric-number');
+        const speed = 50; // Što je manji broj, animacija je brža
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5 // Pokreće se kad pola sekcije bude vidljivo
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const suffix = counter.getAttribute('data-suffix') || '';
+                        
+                        const updateCount = () => {
+                            const count = +counter.innerText.replace(/[^0-9]/g, '');
+                            const inc = Math.ceil(target / speed);
+
+                            if (count < target) {
+                                counter.innerText = (count + inc) + suffix;
+                                setTimeout(updateCount, 20);
+                            } else {
+                                counter.innerText = target + suffix;
+                            }
+                        };
+                        updateCount();
+                    });
+                    observer.unobserve(entry.target); // Animira se samo jednom
+                }
+            });
+        }, observerOptions);
+
+        const metricsSection = document.getElementById('metrics');
+        if (metricsSection) {
+            observer.observe(metricsSection);
+        }
     </script>
 </body>
 </html>
